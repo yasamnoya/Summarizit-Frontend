@@ -9,22 +9,28 @@ submitButton.onclick = async (e) =>{
   e.preventDefault();
   e.stopPropagation();
 
+  summaryTextarea.textContent = "Loading..."
 
-  data = {
-    sourceText: sourceTextarea.value
-  };
-  baseURL = `http://140.118.127.72:${PORT}/`;
-  mode = modeSelect.value;
+  try{
+    data = {
+      sourceText: sourceTextarea.value
+    };
+    baseURL = `http://140.118.127.72:${PORT}/`;
+    mode = modeSelect.value;
 
-  console.log(`fetching ${baseURL}${mode}`);
-  console.log(`with body ${JSON.stringify(data)}`);
+    console.log(`fetching ${baseURL}${mode}`);
+    console.log(`with body ${JSON.stringify(data)}`);
 
-  response = await fetch(`${baseURL}${mode}`, {
-    method: 'POST',
-    body: JSON.stringify(data),
-  }).then((res) => res.json());
+    response = await fetch(`${baseURL}${mode}`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }).then((res) => res.json());
 
-  console.log(response);
-  summary = response.summary;
-  summaryTextarea.textContent = summary;
+    console.log(response);
+    summary = response.summary;
+    summaryTextarea.textContent = summary;
+  }
+  catch(e){
+    summaryTextarea.textContent = "Something wrong happened..."
+  }
 };
