@@ -1,7 +1,7 @@
 let submitButton = document.getElementById("submitButton");
 let sourceTextarea = document.getElementById("sourceTextarea");
-let summaryTextarea = document.getElementById("summaryTextarea");
-let modeSelect = document.getElementById("modeSelect");
+let extSummaryTextarea = document.getElementById("extSummaryTextarea");
+let absSummaryTextarea = document.getElementById("absSummaryTextarea");
 
 let PORT = 3000;
 
@@ -9,28 +9,31 @@ submitButton.onclick = async (e) =>{
   e.preventDefault();
   e.stopPropagation();
 
-  summaryTextarea.textContent = "Loading..."
+  console.log(extSummaryTextarea)
+  extSummaryTextarea.textContent = "Summarizing...";
+  absSummaryTextarea.textContent = "Summarizing...";
 
   try{
     data = {
       sourceText: sourceTextarea.value
     };
     baseURL = `http://140.118.127.72:${PORT}/`;
-    mode = modeSelect.value;
 
-    console.log(`fetching ${baseURL}${mode}`);
+    console.log(`fetching ${baseURL}`);
     console.log(`with body ${JSON.stringify(data)}`);
 
-    response = await fetch(`${baseURL}${mode}`, {
+    response = await fetch(`${baseURL}`, {
       method: 'POST',
       body: JSON.stringify(data),
     }).then((res) => res.json());
 
     console.log(response);
-    summary = response.summary;
-    summaryTextarea.textContent = summary;
+    let extSummary = response.ext;
+	let absSummary = response.abs;
+    extSummaryTextarea.textContent = extSummary;
+	absSummaryTextarea.textContent = absSummary;
   }
   catch(e){
-    summaryTextarea.textContent = "Something wrong happened..."
+    extSummaryTextarea.textContent = "Something wrong happened..."
   }
 };

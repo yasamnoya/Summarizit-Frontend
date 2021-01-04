@@ -15,19 +15,10 @@
           <textarea class="form-control" id="sourceTextarea" rows="20"></textarea>
         </div>
         <div class="col">
-          <label for="summaryTextarea">Summary</label>
-          <textarea class="form-control" id="summaryTextarea" rows="20"></textarea>
-        </div>
-      </div>
-      <div class="row my-2">
-        <div class="col">
-          <label for="modeSelect">Mode</label>
-          <select class="custom-select" id="modeSelect">
-            <option value="abs/trans" selected>Abstractive: Transformer</option>
-            <option value="ext/trans">Extractive: Transformer</option>
-            <option value="ext/rnn">Extractive: RNN</option>
-            <option value="ext/cls">Extractive: Classifier</option>
-          </select>
+          <label for="extSummaryTextarea">Extractive Summary</label>
+          <textarea class="form-control" id="extSummaryTextarea" rows="9"></textarea>
+          <label for="absSummaryTextarea">Abstractive Summary</label>
+          <textarea class="form-control" id="absSummaryTextarea" rows="9"></textarea>
         </div>
       </div>
       <button type="button" class="btn btn-primary" id="submitButton">Summarizit !</button>
