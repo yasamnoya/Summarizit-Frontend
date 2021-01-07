@@ -13,18 +13,31 @@
 	</nav>
 	<div class="container my-5">
 		<div class="row my-2">
-			<div class="col">
+			<div class="col d-flex flex-column" style="height:60vh;">
 				<label for="sourceTextarea">Long Document</label>
-				<textarea class="form-control" id="sourceTextarea" rows="20"></textarea>
+				<div class="border flex-grow-1" id="sourceTextarea"></div>
 			</div>
-			<div class="col">
-				<label for="extSummaryTextarea">Extractive Summary</label>
-				<textarea class="form-control" id="extSummaryTextarea" rows="9"></textarea>
-				<label for="absSummaryTextarea">Abstractive Summary</label>
-				<textarea class="form-control" id="absSummaryTextarea" rows="9"></textarea>
+			<div class="col" style="height:60vh;">
+
+				<div class="row h-50 pb-2">
+					<div class="col d-flex flex-column">
+						<label for="extSummaryTextarea">Extractive Summary</label>
+						<div class="border flex-grow-1" id="extSummaryTextarea"></div>
+					</div>
+				</div>
+
+				<div class="row h-50">
+					<div class="col d-flex flex-column">
+						<label for="absSummaryTextarea">Abstractive Summary</label>
+						<div class="border flex-grow-1" id="abs"></div>
+					</div>
+				</div>
+
 			</div>
 		</div>
-		<button type="button" class="btn btn-primary" id="submitButton">Summarizit !</button>
+		<div sytle="height:100vh;">
+			<button type="button" class="btn btn-primary" id="submitButton">Summarizit !</button>
+		</div>
 		<hr class="nomargin-bottom margin-top-10">
 		<div id="searchResultsPanel" class="panel-body">
 			<!-- SEARCH RESULTS -->
