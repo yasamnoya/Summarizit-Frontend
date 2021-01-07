@@ -4,6 +4,8 @@ const extSummaryTextarea = document.getElementById("extSummaryTextarea");
 const absSummaryTextarea = document.getElementById("absSummaryTextarea");
 const searchResultsPanel = document.getElementById("searchResultsPanel");
 
+
+
 const PORT = 3000;
 
 function updateSearchResults(searchResults) {
@@ -36,6 +38,25 @@ function clearSearchResults(){
 	}
 }
 
+sourceTextarea.onclick = (e) => {
+	e.preventDefault();
+	toReplace(sourceTextarea);
+}
+
+function toReplace(divElement){
+	var inputElement = document.createElement("textArea");
+	inputElement.setAttribute("rows", 21)
+	inputElement.setAttribute("class", "border-2 border-primary rounded")
+	inputElement.value = divElement.innerHTML;
+
+	divElement.parentNode.replaceChild(inputElement, divElement);
+	inputElement.focus();
+	inputElement.onblur = function() {
+		divElement.innerHTML = inputElement.value;
+		inputElement.parentNode.replaceChild(divElement, inputElement);
+	}
+}
+
 submitButton.onclick = async (e) => {
 	e.preventDefault();
 	e.stopPropagation();
@@ -49,7 +70,7 @@ submitButton.onclick = async (e) => {
 	// update summaries
 	try {
 		data = {
-			sourceText: sourceTextarea.value
+			sourceText: sourceTextarea.innerHTML
 		};
 		baseURL = `http://140.118.127.72:${PORT}/`;
 
@@ -64,10 +85,12 @@ submitButton.onclick = async (e) => {
 		console.log(response);
 		let extSummary = response.ext;
 		let absSummary = response.abs;
+		let highlightedSourceText = response.highlighted;
 		let searchResults = response.searchResults;
 
-		extSummaryTextarea.textContent = extSummary;
-		absSummaryTextarea.textContent = absSummary;
+		sourceTextarea.innerHTML = highlightedSourceText;
+		extSummaryTextarea.innerHTML = extSummary;
+		absSummaryTextarea.innerHTML = absSummary;
 		updateSearchResults(searchResults);
 	}
 	catch (e) {
